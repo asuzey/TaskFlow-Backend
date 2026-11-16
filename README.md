@@ -1,29 +1,140 @@
-# TaskFlow - Görev ve Proje Yönetim Sistemi API
+# TaskFlow Backend
 
-Node.js ve Express.js kullanılarak geliştirilmiş, yazılım ekipleri için görev yönetimini sağlayan REST API projesidir.
+> Yazılım ekipleri için görev ve proje yönetimi REST API'si.
 
-## Proje Gereksinimleri
-- Node.js (v18 veya üzeri önerilir)
-- Postman (API uçlarını test etmek için)
+TaskFlow, **Node.js** ve **Express.js** kullanılarak geliştirilmiş basit ve anlaşılır bir görev yönetim API'sidir. Görevleri listeleyebilir, detaylarını görüntüleyebilir, yeni görev oluşturabilir, güncelleyebilir ve silebilirsiniz.
 
-## Kurulum Adımları
-1. Projeyi bilgisayarınıza klonlayın veya indirin:
-   ```bash
-   git clone https://github.com/asuzey/TaskFlow-Backend.git
-   cd TaskFlow-Backend
-Gerekli bağımlılıkları (express) yükleyin:
-Bash
+## Özellikler
+
+- RESTful API yapısı
+- Görevler için tam CRUD işlemleri
+- JSON formatında istek ve yanıtlar
+- Dosya tabanlı kalıcı veri saklama
+- Basit istek loglama middleware'i
+- Postman ile test edilebilir endpoint'ler
+
+## Kullanılan Teknolojiler
+
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
+- JavaScript — CommonJS
+- JSON dosya tabanlı veri saklama
+
+## Gereksinimler
+
+- Node.js **18 veya üzeri**
+- npm
+- İsteğe bağlı: [Postman](https://www.postman.com/)
+
+## Kurulum ve Çalıştırma
+
+```bash
+git clone https://github.com/asuzey/TaskFlow-Backend.git
+cd TaskFlow-Backend
 npm install
-Sunucuyu başlatın:
-Bash
-node server.js
-Sunucu başarıyla başlatıldığında terminalde sunucu http://localhost:3000 adresinde calisiyor mesajı görünecektir.
-API Uç Noktaları (CRUD)
-İşlem	Metot	Uç Nokta	Açıklama
-Listeleme	GET	/tasks	Tüm görevleri JSON formatında getirir
-Detay	GET	/tasks/:id	Belirli bir ID'ye sahip görevi getirir
-Ekleme	POST	/tasks	Sisteme yeni görev ekler
-Güncelleme	PUT	/tasks/:id	Var olan görevi günceller
-Silme	DELETE	/tasks/:id	Belirtilen görevi sistemden kaldırır
-Test Ekran Görüntüleri
-Tüm CRUD operasyonlarının Postman üzerindeki test kanıtları ekranGoruntuleri/ klasöründe yer almaktadır.
+npm start
+```
+
+Sunucu başlatıldıktan sonra API şu adreste çalışır:
+
+```text
+http://localhost:3000
+```
+
+API'nin çalıştığını kontrol etmek için:
+
+```bash
+curl http://localhost:3000/
+```
+
+## API Endpoint'leri
+
+Temel URL: `http://localhost:3000`
+
+| İşlem | Metot | Endpoint | Açıklama |
+| --- | :---: | --- | --- |
+| Sağlık kontrolü | `GET` | `/` | API'nin çalışıp çalışmadığını kontrol eder. |
+| Tüm görevleri listeleme | `GET` | `/tasks` | Tüm görevleri ve toplam görev sayısını döndürür. |
+| Görev detayı | `GET` | `/tasks/:id` | ID değerine göre tek bir görev döndürür. |
+| Yeni görev oluşturma | `POST` | `/tasks` | Yeni bir görev ekler. `title` ve `assignee` zorunludur. |
+| Görev güncelleme | `PUT` | `/tasks/:id` | Gönderilen alanları günceller. |
+| Görev silme | `DELETE` | `/tasks/:id` | ID değerine sahip görevi siler. |
+
+### Yeni görev oluşturma
+
+`POST /tasks`
+
+```json
+{
+  "title": "API dokümantasyonunu hazırla",
+  "description": "Endpoint'leri ve örnek istekleri README dosyasına ekle.",
+  "status": "pending",
+  "priority": "high",
+  "assignee": "Ayşe"
+}
+```
+
+`title` ve `assignee` alanları zorunludur. Gönderilmeyen alanlar için varsayılan değerler kullanılır:
+
+- `description`: `""`
+- `status`: `"pending"`
+- `priority`: `"medium"`
+
+### Görev güncelleme
+
+`PUT /tasks/1` isteğinde yalnızca değiştirmek istediğiniz alanları gönderebilirsiniz:
+
+```json
+{
+  "status": "completed",
+  "priority": "medium"
+}
+```
+
+### Örnek yanıt
+
+```json
+{
+  "basarili": true,
+  "data": {
+    "id": 1,
+    "title": "API dokümantasyonunu hazırla",
+    "description": "Endpoint'leri ve örnek istekleri README dosyasına ekle.",
+    "status": "pending",
+    "priority": "high",
+    "assignee": "Ayşe",
+    "createdAt": "2026-01-01T12:00:00.000Z"
+  }
+}
+```
+
+## Proje Yapısı
+
+```text
+TaskFlow-Backend/
+├── data/                 # JSON tabanlı görev verileri
+├── ekranGoruntuleri/     # Postman test ekran görüntüleri
+├── middleware/           # İstek loglama middleware'i
+├── routes/               # API route'ları
+├── utils/                # Dosya okuma ve yazma yardımcıları
+├── app.js                # Express uygulaması ve middleware'ler
+├── server.js             # Sunucu giriş noktası
+├── package.json          # Proje ayarları ve bağımlılıklar
+└── README.md
+```
+
+## Postman Testleri
+
+CRUD işlemlerine ait Postman test ekran görüntüleri:
+
+| İşlem | Görsel |
+| --- | --- |
+| Görevleri listeleme | [listeleme.png](ekranGoruntuleri/listeleme.png) |
+| Görev detayı | [detay.png](ekranGoruntuleri/detay.png) |
+| Görev ekleme | [gorevEkleme.png](ekranGoruntuleri/gorevEkleme.png) |
+| Görev güncelleme | [guncelleme.png](ekranGoruntuleri/guncelleme.png) |
+| Görev silme | [silme.png](ekranGoruntuleri/silme.png) |
+
+## Lisans
+
+Bu proje eğitim ve geliştirme amacıyla hazırlanmıştır.

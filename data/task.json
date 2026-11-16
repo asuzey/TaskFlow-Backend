@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Frontend Entegrasyonu",
+    "description": "Web arayuzu ile baglanacak",
+    "status": "pending",
+    "priority": "high",
+    "assignee": "Asuman Zeynep Bayram",
+    "createdAt": "2026-11-15T19:18:28.177Z"
+  },
+  {
+    "id": 2,
+    "title": "TaskFlow Backend Endpointlerini Kodla",
+    "description": "Musa Hoca'nın istedigi 5 temel CRUD ucu yazilacak.",
+    "status": "in-progress",
+    "priority": "high",
+    "assignee": "Asuman Zeynep Bayram",
+    "createdAt": "2026-11-15T11:30:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Postman Testlerini Kontrol Et",
+    "description": "Musa Hoca'nin odev kriterleri icin ekran goruntuleri alinacak.",
+    "status": "pending",
+    "priority": "medium",
+    "assignee": "Musa Hoca",
+    "createdAt": "2026-11-15T14:15:00.000Z"
+  }
+]

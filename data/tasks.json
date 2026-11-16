@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Veritabanı Şemasını Oluştur",
+    "description": "NovaStoreDB tabloları ve ilişkileri hazırlanacak.",
+    "status": "completed",
+    "priority": "high",
+    "assignee": "Ahmet Yılmaz",
+    "createdAt": "2026-11-10T09:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "REST API Uçlarını Yaz",
+    "description": "TaskFlow için CRUD endpointleri geliştirilecek.",
+    "status": "in-progress",
+    "priority": "high",
+    "assignee": "Ayşe Kaya",
+    "createdAt": "2026-11-12T11:30:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Postman Testlerini Tamamla",
+    "description": "Tüm endpointler Postman üzerinde test edilecek.",
+    "status": "pending",
+    "priority": "medium",
+    "assignee": "Mehmet Demir",
+    "createdAt": "2026-11-14T14:15:00.000Z"
+  }
+]
